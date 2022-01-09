@@ -1,0 +1,35 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        ans=[]
+        a=0
+        my_list1=['(' , '{' , '[' ]
+        my_list2=[ ')', '}' , ']' ]
+        my_dict={
+            ')':'(',
+            ']':'[',
+            '}':'{',
+        }
+        
+        if(len(s)%2==1):
+            return False
+        if(s[len(s)-1] in my_list1):
+            return False
+            
+        if(s[0] in my_list2):
+            return False
+        
+        for i in range(len(s)):
+            if(s[i] in my_list1):
+                ans.append(s[i])
+                a+=1
+            elif(s[i] in my_list2):
+                if(ans==[]):
+                    return False
+                elif(my_dict[s[i]]==ans.pop()):
+                    a-=1
+                else:
+                    return False
+        if(ans):
+            return False
+        else:
+            return True
